@@ -1,8 +1,8 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, MouseEventHandler } from "react";
 
 type Props = {
   text: string;
-  onClick: Function;
+  onClick?: MouseEventHandler;
 };
 
 const Button: FunctionComponent<Props> = ({ text, onClick }) => (
