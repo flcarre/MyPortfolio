@@ -20,7 +20,10 @@
   },
   "lint-staged": {
     "./**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix"
+      "yarn test",
+      "yarn type-check",
+      "yarn format",
+      "yarn lint"
     ],
     "*.js": "eslint --cache --fix"
   },
