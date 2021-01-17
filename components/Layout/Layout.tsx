@@ -1,4 +1,5 @@
 import { FunctionComponent, ReactNode, useState } from "react";
+
 import SideBar from "../SideBar/SideBar";
 import Switcher from "../Switcher/Switcher";
 
@@ -12,7 +13,7 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
   return (
     <div className={`${darkMode ? "dark" : ""} h-full w-full`}>
       <div className="bg-light dark:bg-dark h-full w-full">
-        <Switcher state={darkMode} handleChange={() => setDarkMode(!darkMode)} theme />
+        <Switcher state={darkMode} onChange={() => setDarkMode(!darkMode)} theme />
         <div className="grid grid-cols-10  h-full w-full justify-items-auto">
           <div>
             <SideBar />

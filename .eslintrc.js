@@ -15,11 +15,16 @@ module.exports = {
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
   },
   env: {
-    "jest/globals": true,
     browser: true,
     amd: true,
     node: true,
   },
+  overrides: [
+    {
+      files: ["**/*.test.tsx"],
+      extends: ["plugin:jest/recommended", "plugin:jest/style"],
+    },
+  ],
   plugins: ["simple-import-sort", "import"],
   extends: [
     "eslint:recommended",
