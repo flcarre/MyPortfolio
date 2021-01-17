@@ -5,9 +5,13 @@ module.exports = {
     // Read more about this here: https://tailwindcss.com/docs/installation#building-your-css
     "./pages/**/*.tsx",
   ],
-  darkMode: false,
+  darkMode: "class",
   theme: {
     extend: {},
+    colors: {
+      dark: "#353353",
+      light: "#f8f1f1",
+    },
   },
   variants: {
     extend: {},

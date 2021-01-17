@@ -15,6 +15,7 @@ module.exports = {
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
   },
   env: {
+    "jest/globals": true,
     browser: true,
     amd: true,
     node: true,
