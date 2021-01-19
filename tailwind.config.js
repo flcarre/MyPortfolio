@@ -4,6 +4,7 @@ module.exports = {
     // but it's good to build your production application
     // Read more about this here: https://tailwindcss.com/docs/installation#building-your-css
     "./pages/**/*.tsx",
+    "./components/**/*.tsx",
   ],
   darkMode: "class",
   theme: {
