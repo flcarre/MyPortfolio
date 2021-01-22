@@ -16,10 +16,11 @@ const Switcher: FunctionComponent<Props> = ({ state, onChange, themeSwitcher }) 
     onChange(event);
   };
 
-  const theme = useContext(ThemeContext);
+  const context = useContext(ThemeContext);
+  const { theme } = context;
 
   return (
-    <div className="flex flex-row fixed top-5 right-10">
+    <div className="flex flex-row">
       <Switch checked={state} onChange={handleChange} color="primary" name="Switcher" />
       {themeSwitcher && (
         <div className="flex items-center">

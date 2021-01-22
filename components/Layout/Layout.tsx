@@ -4,8 +4,8 @@ import { createContext, FunctionComponent, ReactNode, useEffect, useState } from
 import resolveConfig from "tailwindcss/resolveConfig";
 
 import tailwindConfig from "../../tailwind.config.js";
+import { Ttheme } from "../../types/themeType";
 import SideBar from "../SideBar/SideBar";
-import Switcher from "../Switcher/Switcher";
 
 type Props = {
   children?: ReactNode;
@@ -21,21 +21,29 @@ const getTheme = (isDark: boolean) => {
   };
 };
 
-export const ThemeContext = createContext(getTheme(true));
+export const ThemeContext = createContext({
+  theme: getTheme(true),
+  darkModeControler: { darkMode: true, setDarkMode: (boolean): void => {} },
+});
 
 const Layout: FunctionComponent<Props> = ({ children }) => {
   const [darkMode, setDarkMode] = useState(true);
   const [theme, setTheme] = useState(getTheme(darkMode));
 
+  const [darkModeControler, setDarkModeControler] = useState({
+    darkMode,
+    setDarkMode,
+  });
+
   useEffect(() => {
     setTheme(getTheme(darkMode));
+    setDarkModeControler({ darkMode, setDarkMode });
   }, [darkMode]);
 
   return (
     <div className={`${darkMode ? "dark" : ""} h-full w-full`}>
-      <ThemeContext.Provider value={theme}>
+      <ThemeContext.Provider value={{ theme, darkModeControler }}>
         <div className="bg-light dark:bg-dark h-full w-full">
-          <Switcher state={darkMode} onChange={() => setDarkMode(!darkMode)} themeSwitcher />
           <div className="flex h-full w-full justify-items-auto">
             <div className="w-32">
               <SideBar />
