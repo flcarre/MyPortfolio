@@ -1,60 +1,55 @@
 import { createContext, FunctionComponent, ReactNode, useEffect, useState } from "react";
+
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import resolveConfig from "tailwindcss/resolveConfig";
-
-import tailwindConfig from "../../tailwind.config.js";
-import { Ttheme } from "../../types/themeType";
 import SideBar from "../SideBar/SideBar";
+import Switcher from "../Switcher/Switcher";
+import {
+  BackgroundContainer,
+  ChildrenContainer,
+  LayoutContainer,
+  MainPartContainer,
+  SideBarContainer,
+  SwitcherContainer,
+} from "./style";
 
 type Props = {
   children?: ReactNode;
 };
 
-const getTheme = (isDark: boolean) => {
-  const tailwindConfigValues = resolveConfig(tailwindConfig);
-
-  return {
-    mainColor: isDark
-      ? tailwindConfigValues.theme.colors.light
-      : tailwindConfigValues.theme.colors.dark,
-  };
-};
+const getTheme = (isDark: boolean) => ({
+  mainColor: isDark ? "#f8f1f1" : "#353353",
+  oppositeColor: isDark ? "#353353" : "#f8f1f1",
+});
 
 export const ThemeContext = createContext({
   theme: getTheme(true),
-  darkModeControler: { darkMode: true, setDarkMode: (boolean): void => {} },
 });
 
 const Layout: FunctionComponent<Props> = ({ children }) => {
   const [darkMode, setDarkMode] = useState(true);
   const [theme, setTheme] = useState(getTheme(darkMode));
 
-  const [darkModeControler, setDarkModeControler] = useState({
-    darkMode,
-    setDarkMode,
-  });
-
   useEffect(() => {
     setTheme(getTheme(darkMode));
-    setDarkModeControler({ darkMode, setDarkMode });
   }, [darkMode]);
 
   return (
-    <div className={`${darkMode ? "dark" : ""} h-full w-full`}>
-      <ThemeContext.Provider value={{ theme, darkModeControler }}>
-        <div className="bg-light dark:bg-dark h-full w-full">
-          <div className="flex h-full w-full justify-items-auto">
-            <div className="w-32">
+    <LayoutContainer>
+      <ThemeContext.Provider value={{ theme }}>
+        <SwitcherContainer>
+          <Switcher state={darkMode} onChange={() => setDarkMode(!darkMode)} themeSwitcher />
+        </SwitcherContainer>
+        <BackgroundContainer backgroundColor={theme.oppositeColor}>
+          <MainPartContainer>
+            <SideBarContainer>
               <SideBar />
-            </div>
-            <div id="children" className="col-span-11">
-              {children}
-            </div>
-          </div>
-        </div>
+            </SideBarContainer>
+            <ChildrenContainer>{children}</ChildrenContainer>
+          </MainPartContainer>
+        </BackgroundContainer>
       </ThemeContext.Provider>
-    </div>
+    </LayoutContainer>
   );
 };
 

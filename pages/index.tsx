@@ -1,13 +1,16 @@
-import "tailwindcss/tailwind.css";
-
 import { FunctionComponent } from "react";
 
 import Layout from "../components/Layout/Layout";
 
 const IndexPage: FunctionComponent = () => {
   return (
-    <div className=" h-screen w-screen">
+    <div>
       <Layout>Layout</Layout>
+      <style jsx>{`
+        body {
+          margin: 0;
+        }
+      `}</style>
     </div>
   );
 };

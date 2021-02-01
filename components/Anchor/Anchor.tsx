@@ -1,4 +1,7 @@
-import { FunctionComponent, ReactNode } from "react";
+import { FunctionComponent, ReactNode, useContext } from "react";
+
+import { ThemeContext } from "../Layout/Layout";
+import { AnchorText, AnchorWrapper } from "./styles";
 
 type Props = {
   Icon: ReactNode;
@@ -6,15 +9,16 @@ type Props = {
 };
 
 const Anchor: FunctionComponent<Props> = ({ Icon, name }) => {
+  const context = useContext(ThemeContext);
+  const { theme } = context;
   return (
-    <button
+    <AnchorWrapper
       onClick={() => {
         console.log(name);
-      }}
-      className="container mx-auto p-4">
-      <div className="grid justify-center">{Icon}</div>
-      <p className="text-dark dark:text-light pt-2">{name}</p>
-    </button>
+      }}>
+      {Icon}
+      <AnchorText textColor={theme.mainColor}>{name}</AnchorText>
+    </AnchorWrapper>
   );
 };
 

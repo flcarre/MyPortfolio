@@ -3,6 +3,7 @@ import { ChangeEvent, FunctionComponent, useContext } from "react";
 import { FiMoon, FiSun } from "react-icons/fi";
 
 import { ThemeContext } from "../Layout/Layout";
+import { SwitcherContainer } from "./styles";
 
 type Props = {
   state: boolean;
@@ -20,18 +21,18 @@ const Switcher: FunctionComponent<Props> = ({ state, onChange, themeSwitcher }) 
   const { theme } = context;
 
   return (
-    <div className="flex flex-row">
+    <SwitcherContainer>
       <Switch checked={state} onChange={handleChange} color="primary" name="Switcher" />
       {themeSwitcher && (
-        <div className="flex items-center">
+        <>
           {state ? (
             <FiMoon color={theme.mainColor} size="32" />
           ) : (
             <FiSun color={theme.mainColor} size="32" />
           )}
-        </div>
+        </>
       )}
-    </div>
+    </SwitcherContainer>
   );
 };
 

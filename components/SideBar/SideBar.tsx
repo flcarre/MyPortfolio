@@ -3,8 +3,8 @@ import { FunctionComponent, ReactNode, useContext } from "react";
 import Anchor from "../Anchor/Anchor";
 import { ThemeContext } from "../Layout/Layout";
 import Logo from "../Logo/Logo";
-import Switcher from "../Switcher/Switcher";
 import { getAnchors } from "./paramProps";
+import { AnchorContainer, SideBarWrapper } from "./styles";
 
 type anchorType = {
   Icon: ReactNode;
@@ -13,25 +13,17 @@ type anchorType = {
 
 const SideBar: FunctionComponent = () => {
   const context = useContext(ThemeContext);
-  const anchors = getAnchors(context.theme.mainColor);
+  const anchors = getAnchors(context.theme.mainColor, 22);
+  const { theme } = context;
   return (
-    <div className="flex flex-col h-full w-full border-solid border-r-2 border-borderDark dark:border-borderLight">
+    <SideBarWrapper borderColor={theme.mainColor}>
       <Logo />
-      <div className="grid  justify-center container pt-28 w-full text-center mx-auto">
+      <AnchorContainer>
         {anchors.map((anchorValues: anchorType) => (
           <Anchor key={anchorValues.name} name={anchorValues.name} Icon={anchorValues.Icon} />
         ))}
-      </div>
-      <div className="absolute bottom-5">
-        <Switcher
-          state={context.darkModeControler.darkMode}
-          onChange={() =>
-            context.darkModeControler.setDarkMode(!context.darkModeControler.darkMode)
-          }
-          themeSwitcher
-        />
-      </div>
-    </div>
+      </AnchorContainer>
+    </SideBarWrapper>
   );
 };
 
