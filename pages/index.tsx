@@ -1,18 +1,11 @@
-import { FunctionComponent } from "react";
+import styled from "@emotion/styled";
 
-import Layout from "../components/Layout/Layout";
+const Layout = styled.div``;
 
-const IndexPage: FunctionComponent = () => {
-  return (
-    <div>
-      <Layout>Layout</Layout>
-      <style jsx>{`
-        body {
-          margin: 0;
-        }
-      `}</style>
-    </div>
-  );
-};
+const IndexPage = () => (
+  <Layout title="Home | Next.js + TypeScript Example">
+    <h1>Hello Next.js 👋</h1>
+  </Layout>
+);
 
 export default IndexPage;

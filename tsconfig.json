@@ -16,8 +16,13 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "esnext"
+    "strictNullChecks": true,
+    "target": "esnext",
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["components/*"]
+    }
   },
-  "exclude": ["node_modules", "**/*.js"],
+  "exclude": ["node_modules"],
   "include": ["**/*.ts", "**/*.tsx"]
 }
